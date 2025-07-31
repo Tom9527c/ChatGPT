@@ -51,7 +51,7 @@ export default function SyncCustom() {
       }
       if (opInfo.opType === 'rowedit') {
         await promptUpdate(opInfo?.opRecord?.id, 'name', opInfo?.opRecord?.name);
-        message.success('Name has been changed');
+        message.success('名称已更改');
         opInfo.resetRecord();
       }
       if (['edit', 'new'].includes(opInfo.opType)) {
@@ -91,7 +91,7 @@ export default function SyncCustom() {
       if (data) {
         await promptCacheSet(data as [], file);
         await promptCacheCmd();
-        message.success('Prompts successfully synchronized');
+        message.success('提示词同步成功');
         const data2 = opReplace(opInfo?.opRecord?.[opSafeKey], {
           ...opInfo?.opRecord,
           last_updated: Date.now(),
@@ -99,9 +99,7 @@ export default function SyncCustom() {
         promptSet(data2);
         opInfo.resetRecord();
       } else {
-        message.error(
-          'Prompts synchronization failed, please try again (click to "View Log" for more details)',
-        );
+        message.error('提示词同步失败，请重试（点击"查看日志"获取更多详情）');
       }
     }
     opInfo.resetRecord();
@@ -118,7 +116,7 @@ export default function SyncCustom() {
           const jsonData = JSON.parse(fileData);
           return [true, jsonData];
         } catch (e) {
-          message.error('JSON parse error, please check your file');
+          message.error('JSON 解析错误，请检查您的文件');
           return [false, null];
         }
       } else {
@@ -127,7 +125,7 @@ export default function SyncCustom() {
           data: fileData,
         });
         if (!list) {
-          message.error('CSV parse error, please check your file');
+          message.error('CSV 解析错误，请检查您的文件');
           return [false, null];
         } else {
           return [true, list];
@@ -135,7 +133,7 @@ export default function SyncCustom() {
       }
     }
 
-    message.error('File parsing exception');
+    message.error('文件解析异常');
     return [false, null];
   };
 
@@ -149,7 +147,7 @@ export default function SyncCustom() {
           await promptSet(data);
           hide();
           opInfo.setRecord(data[0], 'sync');
-          message.success('Data added successfully');
+          message.success('数据添加成功');
         } else {
           const file = vals?.file?.file?.originFileObj;
           const data = opAdd(vals);
@@ -162,7 +160,7 @@ export default function SyncCustom() {
             await promptCacheSet(fmtData(parseData[1] as []), filePath);
             await promptCacheCmd();
             hide();
-            message.success('Data added successfully');
+            message.success('数据添加成功');
           } else {
             opRemove(data?.[0]?.[opSafeKey]);
             return;
@@ -174,7 +172,7 @@ export default function SyncCustom() {
         const data = opReplace(opInfo?.opRecord?.[opSafeKey], vals);
         promptSet(data);
         hide();
-        message.success('Data updated successfully');
+        message.success('数据更新成功');
       }
     });
   };
@@ -191,10 +189,10 @@ export default function SyncCustom() {
         type="primary"
         onClick={opInfo.opNew}
       >
-        Add Prompt
+        添加提示词
       </Button>
       <Button style={{ marginBottom: 10 }} onClick={handleLog}>
-        View Log
+        查看日志
       </Button>
       <Table
         key="id"
@@ -207,7 +205,7 @@ export default function SyncCustom() {
       <Modal
         open={isVisible}
         onCancel={hide}
-        title="Add Prompt"
+        title="添加提示词"
         onOk={handleOk}
         destroyOnClose
         maskClosable={false}

@@ -53,12 +53,10 @@ export default function Scripts() {
         if (isOk) {
           await handleInit();
           opInfo.resetRecord();
-          message.success(
-            `The ${opInfo?.opRecord?.name} script has been synchronized successfully`,
-          );
+          message.success(`${opInfo?.opRecord?.name} 脚本已同步成功`);
         } else {
           message.error(
-            `The ${opInfo?.opRecord?.name} script synchronization failed. You can try editing the script and click the Remote File link to copy the source code.`,
+            `${opInfo?.opRecord?.name} 脚本同步失败。你可以尝试编辑脚本并点击远程文件链接来复制源代码。`,
           );
         }
       }

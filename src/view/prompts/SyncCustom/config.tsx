@@ -10,7 +10,7 @@ import { chatRoot, fmtDate } from '@/utils';
 
 export const syncColumns = () => [
   {
-    title: 'Name',
+    title: '名称',
     dataIndex: 'name',
     key: 'name',
     width: 100,
@@ -19,21 +19,21 @@ export const syncColumns = () => [
     ),
   },
   {
-    title: 'Protocol',
+    title: '协议',
     dataIndex: 'protocol',
     key: 'protocol',
     width: 80,
     render: (v: string) => <Tag>{v}</Tag>,
   },
   {
-    title: 'PATH',
+    title: '路径',
     dataIndex: 'path',
     key: 'path',
     width: 180,
     render: (_: string, row: any) => <RenderPath row={row} />,
   },
   {
-    title: 'Last updated',
+    title: '最后更新',
     dataIndex: 'last_updated',
     key: 'last_updated',
     width: 140,
@@ -45,7 +45,7 @@ export const syncColumns = () => [
     ),
   },
   {
-    title: 'Action',
+    title: '操作',
     fixed: 'right',
     width: 150,
     render: (_: any, row: any, actions: any) => {
@@ -54,26 +54,26 @@ export const syncColumns = () => [
           {row.protocol !== 'local' && (
             <Popconfirm
               overlayStyle={{ width: 250 }}
-              title="Sync will overwrite the previous data, confirm to sync?"
+              title="同步将覆盖之前的数据，确认同步？"
               onConfirm={() => actions.setRecord(row, 'sync')}
-              okText="Yes"
-              cancelText="No"
+              okText="是"
+              cancelText="否"
             >
-              <a>Sync</a>
+              <a>同步</a>
             </Popconfirm>
           )}
           {row.last_updated && (
             <Link to={`${row.id}`} state={row}>
-              View
+              查看
             </Link>
           )}
           <Popconfirm
-            title="Are you sure to delete this path?"
+            title="确定要删除这个路径吗？"
             onConfirm={() => actions.setRecord(row, 'delete')}
-            okText="Yes"
-            cancelText="No"
+            okText="是"
+            cancelText="否"
           >
-            <a>Delete</a>
+            <a>删除</a>
           </Popconfirm>
         </Space>
       );

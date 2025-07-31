@@ -8,6 +8,7 @@ import {
   FormOutlined,
   InfoCircleOutlined,
   CodeOutlined,
+  StarOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 
@@ -21,6 +22,7 @@ import SyncCustom from '@/view/prompts/SyncCustom';
 import SyncRecord from '@/view/prompts/SyncRecord';
 import Notes from '@/view/notes';
 import Markdown from '@/view/markdown';
+import Awesome from '@/view/awesome';
 
 export type ChatRouteMetaObject = {
   label: string;
@@ -40,7 +42,7 @@ export const routes: Array<ChatRouteObject> = [
     path: '/settings',
     element: <Settings />,
     meta: {
-      label: 'Settings',
+      label: '设置',
       icon: <SettingOutlined />,
     },
   },
@@ -48,7 +50,7 @@ export const routes: Array<ChatRouteObject> = [
     path: '/notes',
     element: <Notes />,
     meta: {
-      label: 'Notes',
+      label: '笔记',
       icon: <FormOutlined />,
     },
   },
@@ -60,7 +62,7 @@ export const routes: Array<ChatRouteObject> = [
   {
     path: '/prompts',
     meta: {
-      label: 'Prompts',
+      label: '提示词',
       icon: <BulbOutlined />,
     },
     children: [
@@ -68,7 +70,7 @@ export const routes: Array<ChatRouteObject> = [
         path: 'user-custom',
         element: <UserCustom />,
         meta: {
-          label: 'User Custom',
+          label: '用户自定义',
           icon: <UserOutlined />,
         },
       },
@@ -77,7 +79,7 @@ export const routes: Array<ChatRouteObject> = [
         path: 'sync-prompts',
         element: <SyncPrompts />,
         meta: {
-          label: 'Sync Prompts',
+          label: '同步提示词',
           icon: <SyncOutlined />,
         },
       },
@@ -85,7 +87,7 @@ export const routes: Array<ChatRouteObject> = [
         path: 'sync-custom',
         element: <SyncCustom />,
         meta: {
-          label: 'Sync Custom',
+          label: '同步自定义',
           icon: <FileSyncOutlined />,
         },
       },
@@ -100,7 +102,7 @@ export const routes: Array<ChatRouteObject> = [
     path: '/scripts',
     element: <Scripts />,
     meta: {
-      label: 'Scripts',
+      label: '脚本',
       icon: <CodeOutlined />,
     },
   },
@@ -110,10 +112,18 @@ export const routes: Array<ChatRouteObject> = [
     hideMenu: true,
   },
   {
+    path: '/awesome',
+    element: <Awesome />,
+    meta: {
+      label: '网址管理',
+      icon: <StarOutlined />,
+    },
+  },
+  {
     path: '/about',
     element: <About />,
     meta: {
-      label: 'About',
+      label: '关于',
       icon: <InfoCircleOutlined />,
     },
   },

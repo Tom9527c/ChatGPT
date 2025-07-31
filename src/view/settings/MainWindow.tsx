@@ -1,25 +1,24 @@
 import { Form, Switch, Input, InputNumber, Tooltip } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
-// import SwitchOrigin from '@/components/SwitchOrigin';
+import SwitchOrigin from '@/components/SwitchOrigin';
 import { DISABLE_AUTO_COMPLETE } from '@/utils';
 
 const PopupSearchLabel = () => {
   return (
     <span>
-      Pop-up Search{' '}
+      弹出搜索{' '}
       <Tooltip
         title={
           <div>
             <div style={{ marginBottom: 10 }}>
-              Generate images according to the content: Select the ChatGPT content with the mouse,
-              no more than 400 characters. the <b>DALL·E 2</b> button appears, and click to jump
-              (Note: because the search content filled by the script cannot trigger the event
-              directly, you need to enter a space in the input box to make the button clickable).
+              根据内容生成图片：用鼠标选择 ChatGPT 内容，不超过 400 个字符。出现 <b>DALL·E 2</b>{' '}
+              按钮，点击跳转
+              （注意：因为脚本填充的搜索内容无法直接触发事件，你需要在输入框中输入一个空格来使按钮可点击）。
             </div>
             <div>
-              The application is built using Tauri, and due to its security restrictions, some of
-              the action buttons will not work, so we recommend going to your browser.
+              应用程序使用 Tauri
+              构建，由于其安全限制，某些操作按钮将无法工作，因此我们建议使用浏览器。
             </div>
           </div>
         }
@@ -33,8 +32,8 @@ const PopupSearchLabel = () => {
 const MainCloseLabel = () => {
   return (
     <span>
-      Close Exit{' '}
-      <Tooltip title="Click the close button whether to exit directly, the default minimized.">
+      关闭退出{' '}
+      <Tooltip title="点击关闭按钮是否直接退出，默认最小化。">
         <QuestionCircleOutlined style={{ color: '#1677ff' }} />
       </Tooltip>
     </span>
@@ -50,14 +49,14 @@ export default function MainWindow() {
       <Form.Item label={<MainCloseLabel />} name="main_close" valuePropName="checked">
         <Switch />
       </Form.Item>
-      <Form.Item label="Default Width" name="main_width">
+      <Form.Item label="默认宽度" name="main_width">
         <InputNumber />
       </Form.Item>
-      <Form.Item label="Default Height" name="main_height">
+      <Form.Item label="默认高度" name="main_height">
         <InputNumber />
       </Form.Item>
-      {/* <SwitchOrigin name="main" /> */}
-      <Form.Item label="User Agent (Main)" name="ua_window">
+      <SwitchOrigin name="main" />
+      <Form.Item label="用户代理 (主窗口)" name="ua_window">
         <Input.TextArea
           autoSize={{ minRows: 4, maxRows: 4 }}
           {...DISABLE_AUTO_COMPLETE}

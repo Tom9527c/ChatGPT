@@ -56,7 +56,7 @@ export default function Awesome() {
     const data = opRemoveItems(selectedRowIDs);
     updateJson(data);
     rowReset();
-    message.success('All selected URLs have been deleted');
+    message.success('所有选中的URL已删除');
   };
 
   const handleOk = () => {
@@ -70,12 +70,12 @@ export default function Awesome() {
           const data = opAdd(vals);
           await updateJson(data);
           opInit(data);
-          message.success('Data added successfully');
+          message.success('数据添加成功');
         }
         if (opInfo.opType === 'edit') {
           const data = opReplace(opInfo?.opRecord?.[opSafeKey], vals);
           await updateJson(data);
-          message.success('Data updated successfully');
+          message.success('数据更新成功');
         }
         hide();
       } else {
@@ -87,7 +87,7 @@ export default function Awesome() {
                 {data.title}: {data.url}
               </b>
             </div>
-            <div>This URL already exists, please edit it and try again.</div>
+            <div>此URL已存在，请编辑后重试。</div>
           </div>,
         );
       }
@@ -103,21 +103,21 @@ export default function Awesome() {
     invoke('wa_window', {
       label: 'awesome_preview',
       url: 'index.html?type=preview',
-      title: 'Preview Dashboard',
+      title: '预览仪表板',
     });
   };
 
-  const modalTitle = `${{ new: 'Create', edit: 'Edit' }[opInfo.opType]} URL`;
+  const modalTitle = `${{ new: '创建', edit: '编辑' }[opInfo.opType]} URL`;
 
   return (
     <div>
       <div className="chat-table-btns">
         <div>
           <Button className="chat-add-btn" type="primary" onClick={opInfo.opNew}>
-            Add URL
+            添加URL
           </Button>
           <Button type="dashed" onClick={handlePreview}>
-            Preview Dashboard
+            预览仪表板
           </Button>
           <PreviewTip />
         </div>
@@ -125,20 +125,20 @@ export default function Awesome() {
           {selectedItems.length > 0 && (
             <>
               <Button type="primary" onClick={() => handleEnable(true)}>
-                Enable
+                启用
               </Button>
-              <Button onClick={() => handleEnable(false)}>Disable</Button>
+              <Button onClick={() => handleEnable(false)}>禁用</Button>
               <Popconfirm
                 overlayStyle={{ width: 250 }}
-                title="URLs cannot be recovered after deletion, are you sure you want to delete them?"
+                title="URL删除后无法恢复，确定要删除吗？"
                 placement="topLeft"
                 onConfirm={handleDelete}
-                okText="Yes"
-                cancelText="No"
+                okText="是"
+                cancelText="否"
               >
-                <Button>Delete</Button>
+                <Button>删除</Button>
               </Popconfirm>
-              <span className="num">Selected {selectedItems.length} items</span>
+              <span className="num">已选择 {selectedItems.length} 项</span>
             </>
           )}
         </div>
@@ -177,16 +177,16 @@ const PreviewTip = () => {
       overlayInnerStyle={{ width: 400 }}
       title={
         <div className="awesome-tips">
-          Click the button to preview, and in
-          <Link to="/settings"> Settings </Link>
-          you can set a single URL or Dashboard as the default window for the app.
+          点击按钮预览，在
+          <Link to="/settings"> 设置 </Link>
+          中可以将单个URL或仪表板设置为应用的默认窗口。
           <br />
           <Tag onClick={() => handleGo('main_window')} color="blue">
-            Main Window
+            主窗口
           </Tag>
-          {'or '}
+          {'或 '}
           <Tag onClick={() => handleGo('tray_window')} color="blue">
-            SystemTray Window
+            系统托盘窗口
           </Tag>
         </div>
       }

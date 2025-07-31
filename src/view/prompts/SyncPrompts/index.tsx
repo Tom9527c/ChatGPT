@@ -62,22 +62,22 @@ export default function SyncPrompts() {
       <div className="chat-table-btns">
         <Popconfirm
           overlayStyle={{ width: 250 }}
-          title="Sync will overwrite the previous data, confirm to sync?"
+          title="同步将覆盖之前的数据，确认同步？"
           placement="topLeft"
           onConfirm={handleSync}
-          okText="Yes"
-          cancelText="No"
+          okText="是"
+          cancelText="否"
         >
-          <Button type="primary">Sync</Button>
+          <Button type="primary">同步</Button>
         </Popconfirm>
         <div>
           {selectedItems.length > 0 && (
             <>
               <Button type="primary" onClick={() => handleEnable(true)}>
-                Enable
+                启用
               </Button>
-              <Button onClick={() => handleEnable(false)}>Disable</Button>
-              <span className="num">Selected {selectedItems.length} items</span>
+              <Button onClick={() => handleEnable(false)}>禁用</Button>
+              <span className="num">已选择 {selectedItems.length} 项</span>
             </>
           )}
         </div>
@@ -89,7 +89,7 @@ export default function SyncPrompts() {
         </div>
         {lastUpdated && (
           <span style={{ marginLeft: 10, color: '#888', fontSize: 12 }}>
-            Last updated on {fmtDate(lastUpdated)}
+            最后更新于 {fmtDate(lastUpdated)}
           </span>
         )}
       </div>

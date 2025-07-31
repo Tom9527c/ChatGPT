@@ -9,7 +9,7 @@ import { fmtDate, chatRoot } from '@/utils';
 
 export const scriptColumns = ({ scriptsMap }: any) => [
   {
-    title: 'File Name',
+    title: '文件名',
     dataIndex: 'name',
     key: 'name',
     fixed: 'left',
@@ -17,7 +17,7 @@ export const scriptColumns = ({ scriptsMap }: any) => [
     render: (v: string) => <Tag color={v === 'main.js' ? 'green' : 'default'}>{v}</Tag>,
   },
   {
-    title: 'Version',
+    title: '版本',
     width: 200,
     render: (_: string, row: any) => {
       const next = scriptsMap?.[row.name]?.next_version;
@@ -34,14 +34,14 @@ export const scriptColumns = ({ scriptsMap }: any) => [
     },
   },
   {
-    title: 'Path',
+    title: '路径',
     dataIndex: 'path',
     key: 'path',
     width: 200,
     render: (_: string, row: any) => <RenderPath row={row} />,
   },
   {
-    title: 'Remote File',
+    title: '远程文件',
     width: 200,
     render: (_: string, row: any) => {
       const uri = `https://raw.githubusercontent.com/lencx/ChatGPT/main/scripts/${row.name}`;
@@ -49,7 +49,7 @@ export const scriptColumns = ({ scriptsMap }: any) => [
     },
   },
   {
-    title: 'Action',
+    title: '操作',
     fixed: 'right',
     width: 100,
     render: (_: any, row: any, actions: any) => {
@@ -61,18 +61,18 @@ export const scriptColumns = ({ scriptsMap }: any) => [
             state={row}
             style={{ color: !isExternal ? '#ff4d4f' : '' }}
           >
-            Edit
+            编辑
           </Link>
           {!isExternal && (
             <Popconfirm
               placement="topLeft"
-              title="Are you sure you want to synchronize? It will overwrite all previous modifications made to this file."
+              title="确定要同步吗？这将覆盖之前对此文件所做的所有修改。"
               onConfirm={() => actions.setRecord(row, 'sync')}
-              okText="Yes"
-              cancelText="No"
+              okText="是"
+              cancelText="否"
               overlayStyle={{ width: 300 }}
             >
-              <a>Sync</a>
+              <a>同步</a>
             </Popconfirm>
           )}
         </Space>

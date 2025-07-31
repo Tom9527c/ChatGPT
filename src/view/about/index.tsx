@@ -19,8 +19,8 @@ export default function About() {
     <div className="about">
       <Tabs
         items={[
-          { label: 'About ChatGPT', key: 'about', children: <AboutChatGPT /> },
-          { label: 'Update Log', key: 'log', children: <LogTab content={logContent} /> },
+          { label: '关于 ChatGPT', key: 'about', children: <AboutChatGPT /> },
+          { label: '更新日志', key: 'log', children: <LogTab content={logContent} /> },
         ]}
       />
     </div>
@@ -30,31 +30,29 @@ export default function About() {
 const AboutChatGPT = () => {
   return (
     <div className="about-tab">
-      <Tag>ChatGPT Desktop Application (Mac, Windows and Linux)</Tag>
+      <Tag>ChatGPT 桌面应用程序 (Mac, Windows 和 Linux)</Tag>
       <p>
-        🕒 History versions:{' '}
+        🕒 历史版本:{' '}
         <a href="https://github.com/lencx/ChatGPT/releases" target="_blank">
           lencx/ChatGPT/releases
         </a>
       </p>
       <p>
-        It is just a wrapper for the
+        这只是
         <a href="https://chat.openai.com" target="_blank" title="https://chat.openai.com">
           {' '}
           OpenAI ChatGPT{' '}
         </a>
-        website, no other data transfer exists (you can check the{' '}
+        网站的包装器，不存在其他数据传输（你可以查看{' '}
         <a
           href="https://github.com/lencx/ChatGPT"
           target="_blank"
           title="https://github.com/lencx/ChatGPT"
         >
           {' '}
-          source code{' '}
+          源代码{' '}
         </a>
-        ). The development and maintenance of this software has taken up a lot of my time. If it
-        helps you, you can buy me a cup of coffee (Chinese users can use WeChat to scan the code),
-        thanks!
+        ）。这个软件的开发和维护占用了我很多时间。如果它对你有所帮助，你可以给我买杯咖啡（中国用户可以使用微信扫码），谢谢！
       </p>
       <p className="imgs" style={{ float: 'left' }}>
         <a href="https://www.buymeacoffee.com/lencx" target="_blank">
@@ -77,7 +75,7 @@ const LogTab = ({ content }: { content: string }) => {
   return (
     <div>
       <p>
-        Ref:{' '}
+        参考:{' '}
         <a href="https://github.com/lencx/ChatGPT/blob/main/UPDATE_LOG.md" target="_blank">
           lencx/ChatGPT/UPDATE_LOG.md
         </a>

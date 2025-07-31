@@ -57,7 +57,7 @@ export default function Download() {
       if (opInfo.opType === 'rowedit') {
         const data = opReplace(opInfo?.opRecord?.[opSafeKey], opInfo?.opRecord);
         await updateJson(data);
-        message.success('Name has been changed!');
+        message.success('名称已更改！');
       }
       opInfo.resetRecord();
     })();
@@ -68,7 +68,7 @@ export default function Download() {
       const downloadDir = await path.join(await chatRoot(), 'download');
       await fs.removeDir(downloadDir, { recursive: true });
       await handleRefresh();
-      message.success('All files have been cleared!');
+      message.success('所有文件已清空！');
       return;
     }
 
@@ -85,7 +85,7 @@ export default function Download() {
     });
     Promise.all(rows).then(async () => {
       await handleRefresh();
-      message.success('All files selected are cleared!');
+      message.success('所有选中的文件已清空！');
     });
   };
 
@@ -109,15 +109,15 @@ export default function Download() {
             <>
               <Popconfirm
                 overlayStyle={{ width: 250 }}
-                title="Files cannot be recovered after deletion, are you sure you want to delete them?"
+                title="文件删除后无法恢复，确定要删除吗？"
                 placement="topLeft"
                 onConfirm={handleDelete}
-                okText="Yes"
-                cancelText="No"
+                okText="是"
+                cancelText="否"
               >
-                <Button>Delete</Button>
+                <Button>删除</Button>
               </Popconfirm>
-              <span className="num">Selected {selectedItems.length} items</span>
+              <span className="num">已选择 {selectedItems.length} 项</span>
             </>
           )}
         </div>

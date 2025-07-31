@@ -32,6 +32,14 @@
 - [📝 Update Log](./UPDATE_LOG.md)
 - [🕒 History versions...](https://github.com/lencx/ChatGPT/releases)
 
+## 📚 Documentation
+
+- [📖 Documentation Index](./DOCUMENTATION_INDEX.md) - 完整文档导航
+- [🚀 Quick Start](./QUICK_START.md) - 5 分钟快速上手
+- [📋 Project Documentation](./PROJECT_DOCUMENTATION.md) - 项目完整文档
+- [🛠️ Development Guide](./DEVELOPMENT_GUIDE.md) - 开发指南
+- [🔧 API Documentation](./API_DOCUMENTATION.md) - API 参考文档
+
 <!-- tr-download-start -->
 
 ### Windows

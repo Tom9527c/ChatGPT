@@ -68,9 +68,7 @@ export default function UserCustom() {
         promptCacheJson.map((i: any) => i.cmd).includes(vals.cmd) &&
         opInfo?.opRecord?.cmd !== vals.cmd
       ) {
-        message.warning(
-          `"cmd: /${vals.cmd}" already exists, please change the "${vals.cmd}" name and resubmit.`,
-        );
+        message.warning(`"cmd: /${vals.cmd}" 已存在，请更改 "${vals.cmd}" 名称并重新提交。`);
         return;
       }
       let data = [];
@@ -94,22 +92,22 @@ export default function UserCustom() {
     });
   };
 
-  const modalTitle = `${{ new: 'Create', edit: 'Edit' }[opInfo.opType]} Prompt`;
+  const modalTitle = `${{ new: '创建', edit: '编辑' }[opInfo.opType]} 提示词`;
 
   return (
     <div>
       <div className="chat-table-btns">
         <Button className="chat-add-btn" type="primary" onClick={opInfo.opNew}>
-          Add Prompt
+          添加提示词
         </Button>
         <div>
           {selectedItems.length > 0 && (
             <>
               <Button type="primary" onClick={() => handleEnable(true)}>
-                Enable
+                启用
               </Button>
-              <Button onClick={() => handleEnable(false)}>Disable</Button>
-              <span className="num">Selected {selectedItems.length} items</span>
+              <Button onClick={() => handleEnable(false)}>禁用</Button>
+              <span className="num">已选择 {selectedItems.length} 项</span>
             </>
           )}
         </div>
@@ -118,7 +116,7 @@ export default function UserCustom() {
         <FilePath label="CACHE" paths="cache_prompts/user_custom.json" />
         {lastUpdated && (
           <span style={{ marginLeft: 10, color: '#888', fontSize: 12 }}>
-            Last updated on {fmtDate(lastUpdated)}
+            最后更新于 {fmtDate(lastUpdated)}
           </span>
         )}
       </div>

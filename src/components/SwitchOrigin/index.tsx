@@ -33,15 +33,14 @@ const SwitchOrigin: FC<SwitchOriginProps> = ({ name }) => {
               title={
                 <div>
                   <p>
-                    <b>Set Dashboard as the application default window.</b>
+                    <b>将仪表板设置为应用程序的默认窗口。</b>
                   </p>
                   <p>
-                    If this is enabled, the <Tag color="blue">Switch Origin {labelName}</Tag>{' '}
-                    setting will be invalid.
+                    如果启用此选项，<Tag color="blue">切换来源 {labelName}</Tag> 设置将无效。
                   </p>
                   <p>
-                    If you want to add a new URL to the dashboard, add it in the{' '}
-                    <Link to="/awesome">Awesome</Link> menu and make sure it is enabled.
+                    如果你想在仪表板中添加新的URL，请在 <Link to="/awesome">网址管理</Link>{' '}
+                    菜单中添加并确保已启用。
                   </p>
                 </div>
               }
@@ -63,11 +62,11 @@ const SwitchOrigin: FC<SwitchOriginProps> = ({ name }) => {
               title={
                 <div>
                   <p>
-                    <b>Set a single URL as the application default window.</b>
+                    <b>将单个URL设置为应用程序的默认窗口。</b>
                   </p>
                   <p>
-                    If you need to set a new URL as the application loading window, please add the
-                    URL in the <Link to="/awesome">Awesome</Link> menu and then select it.
+                    如果你需要设置新的URL作为应用程序加载窗口，请在{' '}
+                    <Link to="/awesome">网址管理</Link> 菜单中添加URL，然后选择它。
                   </p>
                 </div>
               }
@@ -84,7 +83,7 @@ const SwitchOrigin: FC<SwitchOriginProps> = ({ name }) => {
               key={`${idx}_${i.url}`}
               label={i.title}
               value={i.url}
-              title={`${i.title}${i.init ? '(Built-in)' : ''}: ${i.url}`}
+              title={`${i.title}${i.init ? '(内置)' : ''}: ${i.url}`}
             >
               <Tag color={i.init ? 'orange' : 'geekblue'}>{i.title}</Tag> {i.url}
             </Select.Option>

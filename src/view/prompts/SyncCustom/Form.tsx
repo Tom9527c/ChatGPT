@@ -81,7 +81,7 @@ const SyncForm: ForwardRefRenderFunction<FormProps, SyncFormProps> = ({ record }
       const isJSON = /.json$/.test(file.name);
       const isOk = isCSV || isJSON;
       if (!isOk) {
-        message.error('You can only upload .json or .csv file!');
+        message.error('只能上传 .json 或 .csv 文件！');
       } else {
         setFileList([file]);
       }
@@ -94,14 +94,10 @@ const SyncForm: ForwardRefRenderFunction<FormProps, SyncFormProps> = ({ record }
   return (
     <>
       <Form form={form} labelCol={{ span: 4 }} initialValues={initFormValue}>
-        <Form.Item
-          label="Name"
-          name="name"
-          rules={[{ required: true, message: 'Please enter a name!' }]}
-        >
-          <Input placeholder="Please enter a name" {...DISABLE_AUTO_COMPLETE} />
+        <Form.Item label="名称" name="name" rules={[{ required: true, message: '请输入名称！' }]}>
+          <Input placeholder="请输入名称" {...DISABLE_AUTO_COMPLETE} />
         </Form.Item>
-        <Form.Item label="Protocol" name="protocol" rules={[{ required: true }]}>
+        <Form.Item label="协议" name="protocol" rules={[{ required: true }]}>
           <Radio.Group onChange={handleType} value={protocol}>
             <Radio value="https">https</Radio>
             <Radio value="http">http</Radio>
@@ -114,15 +110,13 @@ const SyncForm: ForwardRefRenderFunction<FormProps, SyncFormProps> = ({ record }
               label="URL"
               name="url"
               rules={[
-                { required: true, message: 'Please enter the URL!' },
+                { required: true, message: '请输入URL！' },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
                     if (!value || /\.json$|\.csv$/.test(getFieldValue('url'))) {
                       return Promise.resolve();
                     }
-                    return Promise.reject(
-                      new Error('The file supports only .csv and .json formats'),
-                    );
+                    return Promise.reject(new Error('文件仅支持 .csv 和 .json 格式'));
                   },
                 }),
               ]}
@@ -135,7 +129,7 @@ const SyncForm: ForwardRefRenderFunction<FormProps, SyncFormProps> = ({ record }
             </Form.Item>
             <div style={{ marginLeft: 80, color: '#888' }}>
               <p>
-                <b>.ext</b>: only {csvTip} or {jsonTip} file formats are supported.
+                <b>.ext</b>: 仅支持 {csvTip} 或 {jsonTip} 文件格式。
               </p>
             </div>
           </div>
@@ -143,14 +137,14 @@ const SyncForm: ForwardRefRenderFunction<FormProps, SyncFormProps> = ({ record }
         {protocol === 'local' && (
           <Form.Item
             name="file"
-            label="File"
-            rules={[{ required: true, message: 'Please select a file!' }]}
+            label="文件"
+            rules={[{ required: true, message: '请选择文件！' }]}
             style={{ height: 168 }}
           >
             <Upload.Dragger {...uploadOptions}>
-              <Button icon={<UploadOutlined />}>Click to Upload</Button>
+              <Button icon={<UploadOutlined />}>点击上传</Button>
               <p className="ant-upload-hint">
-                Only {csvTip} or {jsonTip} file formats are supported.
+                仅支持 {csvTip} 或 {jsonTip} 文件格式。
               </p>
             </Upload.Dragger>
           </Form.Item>

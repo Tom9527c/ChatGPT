@@ -13,18 +13,18 @@ export const syncColumns = () => [
     ),
   },
   {
-    title: 'Act',
+    title: '动作',
     dataIndex: 'act',
     key: 'act',
   },
   {
-    title: 'Tags',
+    title: '标签',
     dataIndex: 'tags',
     key: 'tags',
-    render: () => <Tag>built-in</Tag>,
+    render: () => <Tag>内置</Tag>,
   },
   {
-    title: 'Enable',
+    title: '启用',
     dataIndex: 'enable',
     key: 'enable',
     render: (v: boolean = false, row: Record<string, any>, action: Record<string, any>) => (
@@ -33,7 +33,7 @@ export const syncColumns = () => [
   },
   Table.EXPAND_COLUMN,
   {
-    title: 'Prompt',
+    title: '提示词',
     dataIndex: 'prompt',
     key: 'prompt',
     render: (v: string) => <span className="chat-prompts-val">{v}</span>,

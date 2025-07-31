@@ -10,7 +10,7 @@ import { fmtDate, chatRoot } from '@/utils';
 
 export const notesColumns = () => [
   {
-    title: 'Name',
+    title: '名称',
     dataIndex: 'name',
     fixed: 'left',
     key: 'name',
@@ -20,37 +20,37 @@ export const notesColumns = () => [
     ),
   },
   {
-    title: 'Path',
+    title: '路径',
     dataIndex: 'path',
     key: 'path',
     width: 200,
     render: (_: string, row: any) => <RenderPath row={row} />,
   },
   {
-    title: 'Created',
+    title: '创建时间',
     dataIndex: 'created',
     key: 'created',
     width: 150,
     render: fmtDate,
   },
   {
-    title: 'Action',
+    title: '操作',
     fixed: 'right',
     width: 160,
     render: (_: any, row: any, actions: any) => {
       return (
         <Space>
-          <a onClick={() => actions.setRecord(row, 'preview')}>Preview</a>
+          <a onClick={() => actions.setRecord(row, 'preview')}>预览</a>
           <Link to={`/md/${row.id}`} state={row}>
-            Edit
+            编辑
           </Link>
           <Popconfirm
-            title="Are you sure to delete this file?"
+            title="确定要删除这个文件吗？"
             onConfirm={() => actions.setRecord(row, 'delete')}
-            okText="Yes"
-            cancelText="No"
+            okText="是"
+            cancelText="否"
           >
-            <a>Delete</a>
+            <a>删除</a>
           </Popconfirm>
         </Space>
       );

@@ -58,14 +58,14 @@ export default function Dashboard() {
         <div className="icon">
           <InboxOutlined style={{ fontSize: 80, marginBottom: 5 }} />
           <br />
-          No data
+          暂无数据
         </div>
         <div className="txt">
-          Go to{' '}
+          前往{' '}
           <a onClick={() => invoke('control_window', { type: 'control' })}>
-            {'Control Center -> Awesome'}
+            {'控制中心 -> 网址管理'}
           </a>{' '}
-          to add data and make sure they are enabled.
+          添加数据并确保已启用。
         </div>
       </div>
     );

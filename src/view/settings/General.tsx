@@ -22,14 +22,14 @@ export default function General() {
 
   return (
     <>
-      <Form.Item label="Stay On Top" name="stay_on_top" valuePropName="checked">
+      <Form.Item label="置顶窗口" name="stay_on_top" valuePropName="checked">
         <Switch />
       </Form.Item>
       {/* <Form.Item label="Save Window State" name="save_window_state" valuePropName="checked">
         <Switch />
       </Form.Item> */}
       {platformInfo === 'darwin' && (
-        <Form.Item label="Titlebar" name="titlebar" valuePropName="checked">
+        <Form.Item label="标题栏" name="titlebar" valuePropName="checked">
           <Switch />
         </Form.Item>
       )}
@@ -38,24 +38,24 @@ export default function General() {
           <Switch />
         </Form.Item>
       )} */}
-      <Form.Item label="Theme" name="theme">
+      <Form.Item label="主题" name="theme">
         <Radio.Group>
-          <Radio value="light">Light</Radio>
-          <Radio value="dark">Dark</Radio>
-          {['darwin', 'windows'].includes(platformInfo) && <Radio value="System">System</Radio>}
+          <Radio value="light">浅色</Radio>
+          <Radio value="dark">深色</Radio>
+          {['darwin', 'windows'].includes(platformInfo) && <Radio value="System">系统</Radio>}
         </Radio.Group>
       </Form.Item>
       <Form.Item label={<AutoUpdateLabel />} name="auto_update">
         <Radio.Group>
-          <Radio value="prompt">Prompt</Radio>
-          <Radio value="silent">Silent</Radio>
+          <Radio value="prompt">提示</Radio>
+          <Radio value="silent">静默</Radio>
           {/*<Radio value="disable">Disable</Radio>*/}
         </Radio.Group>
       </Form.Item>
       <Form.Item label={<GlobalShortcutLabel />} name="global_shortcut">
         <Input placeholder="CmdOrCtrl+Shift+O" {...DISABLE_AUTO_COMPLETE} />
       </Form.Item>
-      <Form.Item label="Set Speech Language" name="speech_lang">
+      <Form.Item label="设置语音语言" name="speech_lang">
         <Select>
           {vlist.map((voice: any) => {
             return (
@@ -74,16 +74,16 @@ export default function General() {
 const AutoUpdateLabel = () => {
   return (
     <span>
-      Auto Update{' '}
+      自动更新{' '}
       <Tooltip
         title={
           <div>
-            <div>Auto Update Policy</div>
+            <div>自动更新策略</div>
             <div>
-              <strong>Prompt</strong>: prompt to install
+              <strong>提示</strong>: 提示安装
             </div>
             <div>
-              <strong>Silent</strong>: install silently
+              <strong>静默</strong>: 静默安装
             </div>
             {/* <div><strong>Disable</strong>: disable auto update</div> */}
           </div>
@@ -98,12 +98,12 @@ const AutoUpdateLabel = () => {
 const GlobalShortcutLabel = () => {
   return (
     <div>
-      Global Shortcut{' '}
+      全局快捷键{' '}
       <Tooltip
         title={
           <div>
-            <div>Shortcut definition, modifiers and key separated by "+" e.g. CmdOrControl+Q</div>
-            <div style={{ margin: '10px 0' }}>If empty, the shortcut is disabled.</div>
+            <div>快捷键定义，修饰符和按键用"+"分隔，例如 CmdOrControl+Q</div>
+            <div style={{ margin: '10px 0' }}>如果为空，则禁用快捷键。</div>
             <a href="https://tauri.app/v1/api/js/globalshortcut" target="_blank">
               https://tauri.app/v1/api/js/globalshortcut
             </a>
