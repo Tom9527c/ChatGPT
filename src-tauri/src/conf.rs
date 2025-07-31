@@ -67,7 +67,7 @@ impl AppConf {
   pub fn new() -> Self {
     info!("conf_init");
     Self {
-      titlebar: !cfg!(target_os = "macos"),
+      titlebar: true,
       hide_dock_icon: false,
       save_window_state: true,
       theme: "light".into(),
