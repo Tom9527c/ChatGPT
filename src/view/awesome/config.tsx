@@ -32,6 +32,15 @@ export const awesomeColumns = () => [
     ),
   },
   {
+    title: '默认',
+    dataIndex: 'default',
+    key: 'default',
+    width: 80,
+    render: (_: any, row: Record<string, any>, action: Record<string, any>) => (
+      <Switch checked={!!row.default} onChange={() => action.setRecord(row, 'default')} />
+    ),
+  },
+  {
     title: '分类',
     dataIndex: 'category',
     key: 'category',

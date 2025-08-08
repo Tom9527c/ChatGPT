@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Table, Modal, Popconfirm, Button, Tooltip, Tag, message } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import { invoke } from '@tauri-apps/api';
+import { invoke, dialog, process } from '@tauri-apps/api';
 
 import useJson from '@/hooks/useJson';
 import useData from '@/hooks/useData';
@@ -37,6 +37,42 @@ export default function Awesome() {
       const data = opRemove(opInfo?.opRecord?.[opSafeKey]);
       updateJson(data);
       opInfo.resetRecord();
+    }
+    if (opInfo.opType === 'default' && opInfo.opRecord) {
+      // Enforce a single default in the list
+      const currentUrl = opInfo.opRecord.url;
+      const next = (opData || []).map((item) => ({
+        ...item,
+        default: item.url === currentUrl,
+      }));
+      // Persist awesome list
+      updateJson(next);
+      // Sync chat.conf.json: set default_origin, main_origin, tray_origin then prompt restart
+      (async () => {
+        try {
+          await invoke('form_confirm', {
+            data: {
+              default_origin: currentUrl,
+              main_origin: currentUrl,
+              tray_origin: currentUrl,
+            },
+            label: 'main',
+          });
+          const isOk = await dialog.ask('默认URL已更新，是否现在重启？', {
+            title: 'ChatGPT 偏好设置',
+          });
+          if (isOk) {
+            await process.relaunch();
+          } else {
+            message.success('默认URL已设置');
+          }
+        } catch (e) {
+          console.error(e);
+          message.error('同步配置失败');
+        } finally {
+          opInfo.resetRecord();
+        }
+      })();
     }
   }, [opInfo.opType, formRef]);
 
