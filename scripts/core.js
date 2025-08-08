@@ -52,7 +52,7 @@ function coreInit() {
         type: null,
         buttonLabel: null,
       },
-    });
+    }).catch(() => {});
   }
 
   window.uid = uid;
@@ -61,7 +61,8 @@ function coreInit() {
   window.transformCallback = transformCallback;
 
   async function init() {
-    if (__TAURI_METADATA__.__currentWindow.label === 'tray') {
+    const hasTauri = !!window.__TAURI_POST_MESSAGE__;
+    if (__TAURI_METADATA__ && __TAURI_METADATA__.__currentWindow.label === 'tray') {
       document.getElementsByTagName('html')[0].style['font-size'] = '70%';
     }
 
@@ -72,30 +73,34 @@ function coreInit() {
       });
     }
 
-    if (__TAURI_METADATA__.__currentWindow.label !== 'tray') {
-      const _platform = await platform();
-      const chatConf = (await invoke('get_app_conf')) || {};
-      if (/darwin/.test(_platform) && !chatConf.titlebar) {
-        const topStyleDom = document.createElement('style');
-        topStyleDom.innerHTML = `#chatgpt-app-window-top{position:fixed;top:0;z-index:999999999;width:100%;height:24px;background:transparent;cursor:grab;cursor:-webkit-grab;user-select:none;-webkit-user-select:none;}#chatgpt-app-window-top:active {cursor:grabbing;cursor:-webkit-grabbing;}`;
-        document.head.appendChild(topStyleDom);
-        const topDom = document.createElement('div');
-        topDom.id = 'chatgpt-app-window-top';
-        document.body.appendChild(topDom);
+    if (__TAURI_METADATA__ && __TAURI_METADATA__.__currentWindow.label !== 'tray' && hasTauri) {
+      try {
+        const _platform = await platform();
+        const chatConf = (await invoke('get_app_conf')) || {};
+        if (/darwin/.test(_platform) && !chatConf.titlebar) {
+          const topStyleDom = document.createElement('style');
+          topStyleDom.innerHTML = `#chatgpt-app-window-top{position:fixed;top:0;z-index:999999999;width:100%;height:24px;background:transparent;cursor:grab;cursor:-webkit-grab;user-select:none;-webkit-user-select:none;}#chatgpt-app-window-top:active {cursor:grabbing;cursor:-webkit-grabbing;}`;
+          document.head.appendChild(topStyleDom);
+          const topDom = document.createElement('div');
+          topDom.id = 'chatgpt-app-window-top';
+          document.body.appendChild(topDom);
 
-        if (window.location.host === 'chat.openai.com') {
-          const intervalId = setInterval(function () {
-            const nav = document.body.querySelector('nav');
-            if (nav) {
-              nav.style.paddingTop = '25px';
-              clearInterval(intervalId);
-            }
-          }, 1000);
+          if (window.location.host === 'chat.openai.com') {
+            const intervalId = setInterval(function () {
+              const nav = document.body.querySelector('nav');
+              if (nav) {
+                nav.style.paddingTop = '25px';
+                clearInterval(intervalId);
+              }
+            }, 1000);
+          }
+
+          topDom.addEventListener('mousedown', () => invoke('drag_window').catch(() => {}));
+          topDom.addEventListener('touchstart', () => invoke('drag_window').catch(() => {}));
+          topDom.addEventListener('dblclick', () => invoke('fullscreen').catch(() => {}));
         }
-
-        topDom.addEventListener('mousedown', () => invoke('drag_window'));
-        topDom.addEventListener('touchstart', () => invoke('drag_window'));
-        topDom.addEventListener('dblclick', () => invoke('fullscreen'));
+      } catch (_) {
+        // ignore tauri scope errors on remote domains
       }
     }
 
@@ -103,7 +108,10 @@ function coreInit() {
       const origin = e.target.closest('a');
       if (!origin || !origin.target) return;
       if (origin && origin.href && origin.target !== '_self') {
-        invoke('open_link', { url: origin.href });
+        if (hasTauri) {
+          invoke('open_link', { url: origin.href }).catch(() => {});
+          e.preventDefault();
+        }
       }
     });
 
@@ -116,9 +124,11 @@ function coreInit() {
       true,
     );
 
-    if (window.location.host === 'chat.openai.com') {
+    if (window.location.host === 'chat.openai.com' && hasTauri) {
       window.__sync_prompts = async function () {
-        await invoke('sync_prompts', { time: Date.now() });
+        try {
+          await invoke('sync_prompts', { time: Date.now() });
+        } catch (_) {}
       };
     }
 

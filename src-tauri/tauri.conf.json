@@ -125,6 +125,15 @@
           ],
           "domain": "app.nofwl.com",
           "enableTauriAPI": true
+        },
+        {
+          "windows": [
+            "core",
+            "main",
+            "tray"
+          ],
+          "domain": "gemini.google.com",
+          "enableTauriAPI": true
         }
       ]
     },
