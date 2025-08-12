@@ -127,6 +127,7 @@ export const routes: Array<ChatRouteObject> = [
       icon: <InfoCircleOutlined />,
     },
   },
+
   {
     path: '/',
     element: <Settings />,
